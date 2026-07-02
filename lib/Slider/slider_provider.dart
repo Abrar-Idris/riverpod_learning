@@ -1,6 +1,21 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
-final sliderProvider = StateProvider<double>((ref){
-  return 0.0;
+final sliderProvider = StateProvider<AppState>((ref){
+  return AppState(slider: 0.5, showPassword: false);
 });
+
+class AppState{
+  final double slider;
+  final bool showPassword;
+  
+  AppState({required this.slider,required this.showPassword});
+  
+  //copy with method 
+AppState copyWith({double? slider,bool? showPassword}){
+  return AppState(
+      slider: slider?? this.slider,
+      showPassword: showPassword?? this.showPassword,
+  );
+}
+}

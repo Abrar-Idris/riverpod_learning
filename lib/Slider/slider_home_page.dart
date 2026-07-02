@@ -18,7 +18,8 @@ class SliderHomePage extends ConsumerWidget {
         children: [
           Consumer(
             builder: (context,ref,child) {
-              final slider = ref.watch(sliderProvider);
+              final slider = ref.watch(sliderProvider.select((state)=>state.slider));
+              print("container");
               return Container(
                 height: 200,
                 width: 200,
@@ -26,14 +27,35 @@ class SliderHomePage extends ConsumerWidget {
               );
             }
           ),
+           Consumer(
+                builder: (context,ref,child) {
+                  final slider = ref.watch(sliderProvider.select((state)=>state.showPassword));
+                  print("icons ");
+                  return InkWell(
+                    onTap: (){
+                      final stateProvider = ref.read(sliderProvider.notifier);
+                      stateProvider.state = stateProvider.state.copyWith(showPassword:!slider);
+                    },
+                    child: Container(
+                      height: 200,
+                      width: 200,
+                      child: slider? Icon(Icons.remove_red_eye_sharp):Icon(Icons.remove_red_eye_outlined),
+                    ),
+                  );
+                }
+            ),
+
           Consumer(
             builder: (context,ref,child) {
               final slider = ref.watch(sliderProvider);
-              return Slider(value: slider, onChanged: (value) {
-                ref.read(sliderProvider.notifier).state = value;
+              return Slider(value: slider.slider, onChanged: (value) {
+                final stateProvider = ref.read(sliderProvider.notifier);
+                stateProvider.state = stateProvider.state.copyWith(slider: value);
               });
             }
-          )
+          ),
+
+         
         ],
       ),
     );
