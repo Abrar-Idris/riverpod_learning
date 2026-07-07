@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_example/Slider/slider_home_page.dart';
 import 'package:riverpod_example/counter_app/counter_home_page.dart';
 import 'package:riverpod_example/home_screen.dart';
+import 'package:riverpod_example/searchFile/home_page.dart';
 
 void main() {
   runApp(const ProviderScope(child:MyApp()));
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: MaterialApp(
-      home: SliderHomePage(),
+      home: HomePage(),
         debugShowCheckedModeBanner: false,
       ),
     );
